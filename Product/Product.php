@@ -1,4 +1,5 @@
-<?php namespace Product
+<?php namespace Product;
+
 abstract class Prod
 {
     private $name; // наименование
