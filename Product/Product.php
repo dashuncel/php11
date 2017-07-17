@@ -113,4 +113,8 @@ abstract class Prod
 
 }
 
-
+interface move
+{
+    public function move($x, $y, $z, $time, $speed); // четырехмерная координата начала движения объекта
+    public function stop($x, $y, $z, $time); // остановка объекта в точке пространства и времени
+}
