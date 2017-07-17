@@ -1,13 +1,13 @@
 <?php namespace Product\pen;
-include_once '..\..\loader.php';
+include_once 'loader.php';
 
 class Pen extends \Product\Prod implements \Product\move
 {
     private $color; // цвет стержня
 
-    public function __construct($name, $weight, $color)
+    public function __construct($id, $name, $weight, $color)
     {
-        parent::__construct($name, $weight);
+        parent::__construct($id, $name, $weight);
         $this->color= $color;
     }
 

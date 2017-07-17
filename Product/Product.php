@@ -10,10 +10,12 @@ abstract class Prod
     private $delivery; // стоимость доставки
     private $discount; // размер скидки
     private $price; // базовая цена
+    private $id; // айди товара
 
-    public function __construct($name, $weight)
+    public function __construct($id, $name, $weight)
     {
         $this->name = $name;
+        $this->id = $id;
         $this->weight = $weight;
     }
 

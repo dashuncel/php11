@@ -16,7 +16,7 @@ function tovar_loader() {
     //echo $phpfiles;
     foreach (explode(',',$phpfiles) as $file) {
         if (file_exists($file)) {
-            echo $file.'<br/>';
+           //echo $file.'<br/>';
             include_once $file;
         }
     }
@@ -41,5 +41,8 @@ function getPhp($dir) {
     }
     return $phpfiles;
 }
+
+$products = []; // массив объектов;
+
 ?>
 

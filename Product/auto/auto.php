@@ -1,5 +1,5 @@
 <?php namespace Product\auto;
-include_once '..\..\loader.php';
+include_once 'loader.php';
 
 class Auto extends \Product\Prod
 {
@@ -8,9 +8,9 @@ class Auto extends \Product\Prod
     private $power;       // мощность
     private $model;       // мощность
 
-    public function __construct($name, $weight, $brand, $model)
+    public function __construct($id, $name, $weight, $brand, $model)
     {
-        parent::__construct($name, $weight);
+        parent::__construct($id, $name, $weight);
         $this->setBrand($brand);
         $this->model = $model;
     }
