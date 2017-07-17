@@ -6,9 +6,10 @@ class Order extends Basket
 
     public function printOrder()
     {
+        echo 'В корзине находится:<br/>';
         $list=$this->getProdList();
         foreach ($list as $prod) {
-            echo '';
+            echo 'Товар '.$prod->getName().', цена '.$prod->getPrice().'<br/>';
         }
 
     }

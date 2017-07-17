@@ -8,10 +8,21 @@ class Auto extends \Product\Prod
     private $power;       // мощность
     private $model;       // мощность
 
-    public function __construct($id, $name, $weight, $brand, $model)
+    public function __construct($id, $name, $weight, $brand, $model, $price)
     {
-        parent::__construct($id, $name, $weight);
+        parent::__construct($id, $name, $weight, $price);
         $this->setBrand($brand);
+        $this->model = $model;
+        echo 'Создан автомобиль '.$this->getBrand().' модель '.$this->getModel().' с ценой '.$this->getPrice().'<br/>';
+    }
+
+    public function getModel()
+    {
+        return $this->model;
+    }
+
+    public function setModel($model)
+    {
         $this->model = $model;
     }
 

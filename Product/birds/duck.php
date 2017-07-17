@@ -7,11 +7,11 @@ class Duck extends \Product\Prod implements \Product\move
     private $poroda; // вид
     private $area;   // территория обитания
 
-    public function __construct($id, $name, $type, $poroda)
+    public function __construct($id, $name, $type, $poroda, $price)
     {
-        parent::__construct($id, $name, $type);
+        parent::__construct($id, $name, $type, $price);
         $this->poroda = $poroda;
-        echo 'Родилась утка '.$this->getName().' породы '.$this->getPoroda();
+        echo 'Родилась утка '.$this->getName().' породы '.$this->getPoroda().' с ценой '.$this->getPrice().'<br/>';
     }
 
     public function getSound()

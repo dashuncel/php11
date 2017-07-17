@@ -19,8 +19,9 @@ class Basket
         $list = $this->getProdList();
         $summ = 0;
         foreach ($list as $prodobj) {
-
+            $summ+=$prodobj->getPrice();
         }
+        return $summ;
     }
 
     // количество товраров в корзие
@@ -51,6 +52,8 @@ class Basket
     public function clearBasket()
     {
         unset($this->prod_list);
+        echo 'Корзина пуста<br/>';
     }
+
 }
 ?>

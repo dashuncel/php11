@@ -12,11 +12,12 @@ abstract class Prod
     private $price; // базовая цена
     private $id; // айди товара
 
-    public function __construct($id, $name, $weight)
+    public function __construct($id, $name, $weight, $price)
     {
         $this->name = $name;
         $this->id = $id;
         $this->weight = $weight;
+        $this->price = $price;
     }
 
     // геттеры:
@@ -52,7 +53,11 @@ abstract class Prod
 
     public function getPrice()
     {
-        $price = $this->price * $this->getDiscount() /  100;
+        if ($this->getDiscount() > 0) {
+            $price = $this->price * $this->getDiscount() / 100;
+        } else {
+            $price = $this->price;
+        }
         return $price;
     }
 

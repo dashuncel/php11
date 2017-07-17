@@ -8,11 +8,12 @@ class Tv extends \Product\Prod
     private $diagonal;
     private $model; // модель
 
-    public function __construct($id, $name, $weight, $brand, $model)
+    public function __construct($id, $name, $weight, $brand, $model, $price)
     {
-        parent::__construct($id, $name, $weight);
+        parent::__construct($id, $name, $weight, $price);
         $this->setBrand($brand);
         $this->model = $model;
+        echo 'Создан телевизор '.$this->getBrand().' модель '.$this->getModel().' с ценой '.$this->getPrice().'<br/>';
     }
 
     public function getBrightness()
@@ -45,6 +46,16 @@ class Tv extends \Product\Prod
         $this->diagonal = $diagonal;
     }
 
+    public function getModel()
+    {
+        return $this->model;
+    }
+
+     public function setModel($model)
+    {
+        $this->model = $model;
+    }
+
     public function __get($name)
     {
         echo "Невозможно получить у класса TV свойство $name";
@@ -54,6 +65,5 @@ class Tv extends \Product\Prod
     {
         echo "Невозможно уствновить классу TV свойство $name";
     }
-
 }
 ?>
