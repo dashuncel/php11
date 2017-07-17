@@ -1,5 +1,5 @@
 <?php namespace Product\tv;
-include_once '..\..\loader.php';
+include_once 'loader.php';
 
 class Tv extends \Product\Prod
 {
@@ -8,9 +8,9 @@ class Tv extends \Product\Prod
     private $diagonal;
     private $model; // модель
 
-    public function __construct($name, $weight, $brand, $model)
+    public function __construct($id, $name, $weight, $brand, $model)
     {
-        parent::__construct($name, $weight);
+        parent::__construct($id, $name, $weight);
         $this->setBrand($brand);
         $this->model = $model;
     }
