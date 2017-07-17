@@ -4,32 +4,42 @@ spl_autoload_register('tovar_loader');
 
 // грузим напрямую:
 function order_loader() {
-    include_once __DIR__.DIRECTORY_SEPARATOR.'Basket'.DIRECTORY_SEPARATOR.'Basket.php';
-    include_once __DIR__.DIRECTORY_SEPARATOR.'Basket'.DIRECTORY_SEPARATOR.'Order.php';
+    $dir=__DIR__.DIRECTORY_SEPARATOR.'Basket'.DIRECTORY_SEPARATOR;
+    include_once $dir.'Basket.php';
+    include_once $dir.'Order.php';
 }
 
-order_loader();
+//order_loader();
 tovar_loader();
 
 // читаем каталоги с товарами:
 function tovar_loader() {
     $pref = __DIR__.DIRECTORY_SEPARATOR.'Product'.DIRECTORY_SEPARATOR; // префикс для поиска товаров
-    echo($pref);
     $phpfiles = getPhp($pref);
-    echo ($phpfiles);
+    echo $phpfiles;
     foreach (explode(',',$phpfiles) as $file) {
-        include_once $pref.$file;
+        if (file_exists($file)) {
+            include_once $file;
+        }
     }
 }
 
+// рекурсивно читаем директории на поиск php фалов:
 function getPhp($dir) {
-    $pattern="/^w*\.php$/"; // маска валидных файлов
+    $pattern="/^\w*.php$/";
     $files=scandir($dir);
     $phpfiles='';
     foreach ($files as $filename) {
-        if(is_dir($filename)) $phpfiles.=','.getPhp($filename);
-        preg_match($pattern, $filename, $matches);
-        $phpfiles.= implode(',',$matches);
+        $full=$dir.$filename;
+        if(is_dir($full) && $filename != '.' && $filename != '..') {
+            $phpfiles.=getPhp($full.DIRECTORY_SEPARATOR);
+        }
+        else {
+            preg_match($pattern, $filename, $matches);
+            foreach ($matches as $php) {
+                $phpfiles .= $dir.$php.',';
+            }
+        }
     }
     return $phpfiles;
 }
