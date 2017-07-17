@@ -42,7 +42,5 @@ function getPhp($dir) {
     return $phpfiles;
 }
 
-$products = []; // массив объектов;
-
 ?>
 

@@ -1,6 +1,8 @@
 <?php
 include_once 'loader.php';
 
+
+$products=[];
 $products[]=new \Product\birds\Duck('1','Утка','селезень','Камчатский селезень',200);
 $products[]=new \Product\auto\Auto('2','lexus rx',2000, 'Lexus', 'lexus rx',1000);
 $products[]=new \Product\pen\Pen('3','Моя ручка',100, 'red',50);

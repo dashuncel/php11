@@ -11,7 +11,6 @@ class Order extends Basket
         foreach ($list as $prod) {
             echo 'Товар '.$prod->getName().', цена '.$prod->getPrice().'<br/>';
         }
-
     }
 }
 ?>
