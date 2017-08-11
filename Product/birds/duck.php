@@ -1,7 +1,7 @@
 <?php namespace Product\birds;
 include_once 'loader.php';
 
-class Duck extends \Product\Prod implements \Product\move
+class Duck extends \Product\AbstractProduct implements \Product\move
 {
     private $sound;  // произносимый звук
     private $poroda; // вид

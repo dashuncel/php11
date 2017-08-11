@@ -1,7 +1,7 @@
 <?php namespace Product\auto;
 include_once 'loader.php';
 
-class Auto extends \Product\Prod
+class Auto extends \Product\AbstractProduct
 {
     private $consumption; // расход топлива
     private $body;        // кузов

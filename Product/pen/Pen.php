@@ -1,7 +1,7 @@
 <?php namespace Product\pen;
 include_once 'loader.php';
 
-class Pen extends \Product\Prod implements \Product\move
+class Pen extends \Product\AbstractProduct implements \Product\move
 {
     private $color; // цвет стержня
 

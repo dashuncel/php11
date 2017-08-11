@@ -1,7 +1,7 @@
 <?php namespace Product\tv;
 include_once 'loader.php';
 
-class Tv extends \Product\Prod
+class Tv extends \Product\AbstractProduct
 {
     private $brightness;      // яркость
     private $resolution;      // разрешение экрана

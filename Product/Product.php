@@ -1,6 +1,6 @@
 <?php namespace Product;
 
-abstract class Prod
+abstract class AbstractProduct
 {
     private $name; // наименование
     private $unit; // единица измерения
