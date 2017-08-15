@@ -3,75 +3,92 @@
 class Basket
 {
     private $prod_list = []; // список товаров в корзине
+    const COUNT_KEY  = 'count';
+    const NAME_KEY = 'name';
+
+    public function __call($name, $arguments)
+    {
+        echo "Метод $name с параметрами " . var_dump($arguments) . " не доступен для данного класса!";
+    }
 
     public function getProdList()
     {
         return $this->prod_list;
     }
 
-    public function getSumm()
+    // общая сумма корзины:
+    public function getAmount()
     {
-        $list = $this->getProdList();
-        $summ = 0;
-        foreach ($list as $product) {
-            $summ += $product->getPrice();
+        $amount = 0;
+        foreach ($this->prod_list as $key => $prod_) {
+            $amount += ($prod_[self::COUNT_KEY] *(float)$prod_[self::NAME_KEY]->getPrice());
         }
-        return $summ;
+        echo "Общая сумма товаров в корзине: $amount<br/>";
+        return $amount;
     }
 
     // общее количество товраров в корзине
     public function getCount()
     {
         $count = 0;
-        $prod_array = $this->getProdList();
-        foreach ($prod_array as $key => $product) {
-            $count += $product['count'];
+        foreach ($this->prod_list as $key => $prod_) {
+            $count += $prod_[self::COUNT_KEY];
         }
-
+        echo "Общее количество товаров в корзине: $count<br/>";
         return $count;
     }
 
     // количество конкретного товрара в корзине
-    public function getCountProd($prod)
+    public function getCountProd($product)
     {
-        $count = 0;
-        $prod_array = $this->getProdList();
-        foreach ($prod_array as $key => $product) {
-            $count += $product['count'];
+        foreach ($this->prod_list as $key => $prod_) {
+            if ($prod_ == $product) {
+                echo "В корзине находится {$prod_[self::COUNT_KEY]} товаров {$prod_[self::NAME_KEY]->getName()} <br/>";
+                return $prod_[self::COUNT_KEY];
+            }
         }
-
-        return $count;
     }
 
     // удаление товара из корзины
-    public function delProd($id)
+    public function delProduct($product)
     {
-        $id = (int)$id;
-        $key = array_search($id, $this->getProdList());
-        if ($key !== false){
-            unset($this->getProdList()[$key]);
+        $flag = false;
+
+        foreach ($this->prod_list as $key => $prod_) {
+            if ($prod_[self::NAME_KEY] == $product) {
+                unset($this->prod_list[$key]);
+                echo "Товар {$product->getName()} успешно удален из корзины<br/>";
+                break;
+            }
         }
     }
 
     // добавление товара в корзину
-    public function addProd($prod, $count)
+    public function addProduct($product, $count)
     {
-        $this->prod_list[]['count'] = $count;
-        $this->prod_list[key($prod_list)]['name'] = $prod;
+        $flag = false;
 
-        if (in_array($prod, $this->getProdList())) {
-
+        foreach ($this->prod_list as $key => $prod_) {
+            if ($this->prod_list[$key][self::NAME_KEY] == $product) {
+                $this->prod_list[$key][self::COUNT_KEY] = $count;
+                echo "Товар {$product->getName()} уже есть в корзине, изменяю количество, теперь $count<br />";
+                $flag = true;
+                break;
+            }
         }
-        else {
-            $this->setProdList($prod, $count);
+
+        if (!$flag) {
+            $this->prod_list[] = [self::NAME_KEY => $product, self::COUNT_KEY => $count];
+            echo "В корзину добавлен товар {$product->getName()} в количестве $count <br/>";
         }
     }
 
     // очистить корзину
     public function clearBasket()
     {
-        unset($this->prod_list);
-        echo 'Корзина пуста<br/>';
+        $this->prod_list = [];
+        var_dump($this->prod_list);
+        echo "Корзина пуста<br/>";
     }
 }
 ?>
