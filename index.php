@@ -8,7 +8,7 @@ $products[] = new \Product\Pen('3','Моя ручка',100, '50','red');
 $products[] = new \Product\Tv('4','49" FHD Flat TV UE49M5000AK Series 5','2100', 'samsung', 'UE49M5000AK',500);
 echo '<hr>';
 
-$basket= new \Basket\Basket();
+$basket = new \Basket\Basket();
 $basket->addProduct($products[1], 1);
 $basket->addProduct($products[2], 2);
 $basket->addProduct($products[3],3);
@@ -20,15 +20,9 @@ $basket->getAmount();
 $basket->getCountProd($products[0]);
 $basket->getCount();
 $basket->delProduct($products[1]);
-$basket->clearBasket();
-$basket->getAmount();
 
-/*
+echo '<hr>';
+$order = new \Basket\Order($basket);
 $order->printOrder();
-echo '<hr>';
-echo "Итого: {$order->getCol()} шт. на сумму {$order->getSumm()} <br/>";
-echo '<hr>';
-$order->clearBasket();
-*/
-?>
+
 
