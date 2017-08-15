@@ -1,56 +1,14 @@
 <?php
-spl_autoload_register('order_loader');
-spl_autoload_register('tovar_loader');
+spl_autoload_register('class_loader');
 
-// грузим напрямую:
-function order_loader() {
-    $dir=__DIR__.DIRECTORY_SEPARATOR.'Basket'.DIRECTORY_SEPARATOR;
-    include_once $dir.'Basket.php';
-    include_once $dir.'Order.php';
-}
-
-// читаем каталоги с товарами:
-function tovar_loader() {
-    $pref = __DIR__.DIRECTORY_SEPARATOR.'Product'.DIRECTORY_SEPARATOR; // префикс для поиска товаров
-    $phpfiles = getPhp($pref);
-    //echo $phpfiles;
-    foreach (explode(',',$phpfiles) as $file) {
-        if (file_exists($file)) {
-           //echo $file.'<br/>';
-            include_once $file;
-        }
+function class_loader($className) {
+    $file = __DIR__ . DIRECTORY_SEPARATOR . $className . '.php';
+    if (file_exists($file)) {
+        include_once $file;
+        echo "Класс $className найден и подключен<br/>";
+    }
+    else {
+        echo "Класс $className не найден в функции order_loader<br/>";
     }
 }
-
-// рекурсивно читаем директории на поиск php фалов:
-function getPhp($dir) {
-    $pattern="/^\w*.php$/";
-    $files=scandir($dir);
-    $phpfiles='';
-    foreach ($files as $filename) {
-        $full=$dir.$filename;
-        if(is_dir($full) && $filename != '.' && $filename != '..') {
-            $phpfiles.=getPhp($full.DIRECTORY_SEPARATOR);
-        }
-        else {
-            preg_match($pattern, $filename, $matches);
-            foreach ($matches as $php) {
-                $phpfiles .= $dir.$php.',';
-            }
-        }
-    }
-    return $phpfiles;
-}
-
-class MyException extends Exception
-{
-    public function __construct($message, $code = 0) {
-        parent::__construct($message, $code);
-    }
-
-    public function __toString() {
-        return __CLASS__ . ": [{$this->code}]: {$this->message}\n";
-    }
-}
-?>
 

@@ -1,5 +1,4 @@
-<?php namespace Product\tv;
-include_once 'loader.php';
+<?php namespace Product;
 
 class Tv extends \Product\AbstractProduct
 {
@@ -8,12 +7,12 @@ class Tv extends \Product\AbstractProduct
     private $diagonal;
     private $model; // модель
 
-    public function __construct($id, $name, $weight, $brand, $model, $price)
+    public function __construct($id, $name, $weight, $price, $brand, $model)
     {
         parent::__construct($id, $name, $weight, $price);
         $this->setBrand($brand);
         $this->model = $model;
-        echo 'Создан телевизор '.$this->getBrand().' модель '.$this->getModel().' с ценой '.$this->getPrice().'<br/>';
+        echo "Создан телевизор {$this->getBrand()}  модель {$this->getModel()}  с ценой {$this->getPrice()} <br/>";
     }
 
     public function getBrightness()

@@ -1,5 +1,4 @@
-<?php namespace Product\birds;
-include_once 'loader.php';
+<?php namespace Product;
 
 class Duck extends \Product\AbstractProduct implements \Product\move
 {
@@ -7,11 +6,11 @@ class Duck extends \Product\AbstractProduct implements \Product\move
     private $poroda; // вид
     private $area;   // территория обитания
 
-    public function __construct($id, $name, $type, $poroda, $price)
+    public function __construct($id, $name, $type, $price, $poroda)
     {
         parent::__construct($id, $name, $type, $price);
         $this->poroda = $poroda;
-        echo 'Родилась утка '.$this->getName().' породы '.$this->getPoroda().' с ценой '.$this->getPrice().'<br/>';
+        echo "Родилась утка {$this->getName()}  породы {$this->getPoroda()} с ценой {$this->getPrice()} <br/>";
     }
 
     public function getSound()

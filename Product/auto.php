@@ -1,5 +1,4 @@
-<?php namespace Product\auto;
-include_once 'loader.php';
+<?php namespace Product;
 
 class Auto extends \Product\AbstractProduct
 {
@@ -8,12 +7,12 @@ class Auto extends \Product\AbstractProduct
     private $power;       // мощность
     private $model;       // мощность
 
-    public function __construct($id, $name, $weight, $brand, $model, $price)
+    public function __construct($id, $name, $weight,  $price, $brand, $model)
     {
         parent::__construct($id, $name, $weight, $price);
         $this->setBrand($brand);
         $this->model = $model;
-        echo 'Создан автомобиль '.$this->getBrand().' модель '.$this->getModel().' с ценой '.$this->getPrice().'<br/>';
+        echo "Создан автомобиль {$this->getBrand()}  модель {$this->getModel()} с ценой  {$this->getPrice()}<br/>";
     }
 
     public function getModel()

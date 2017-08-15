@@ -2,32 +2,45 @@
 
 class Basket
 {
-    private $prod_list=[]; // список товаров в массиве
+    private $prod_list = []; // список товаров в корзине
 
     public function getProdList()
     {
         return $this->prod_list;
     }
 
-    public function setProdList($prod)
-    {
-        $this->prod_list[] = $prod;
-    }
-
     public function getSumm()
     {
         $list = $this->getProdList();
         $summ = 0;
-        foreach ($list as $prodobj) {
-            $summ+=$prodobj->getPrice();
+        foreach ($list as $product) {
+            $summ += $product->getPrice();
         }
         return $summ;
     }
 
-    // количество товраров в корзие
-    public function getCol()
+    // общее количество товраров в корзине
+    public function getCount()
     {
-        return count($this->getProdList());
+        $count = 0;
+        $prod_array = $this->getProdList();
+        foreach ($prod_array as $key => $product) {
+            $count += $product['count'];
+        }
+
+        return $count;
+    }
+
+    // количество конкретного товрара в корзине
+    public function getCountProd($prod)
+    {
+        $count = 0;
+        $prod_array = $this->getProdList();
+        foreach ($prod_array as $key => $product) {
+            $count += $product['count'];
+        }
+
+        return $count;
     }
 
     // удаление товара из корзины
@@ -41,10 +54,16 @@ class Basket
     }
 
     // добавление товара в корзину
-    public function addProd($prod)
+    public function addProd($prod, $count)
     {
-        if (! in_array($prod, $this->getProdList())) {
-            $this->setProdList($prod);
+        $this->prod_list[]['count'] = $count;
+        $this->prod_list[key($prod_list)]['name'] = $prod;
+
+        if (in_array($prod, $this->getProdList())) {
+
+        }
+        else {
+            $this->setProdList($prod, $count);
         }
     }
 
@@ -54,6 +73,5 @@ class Basket
         unset($this->prod_list);
         echo 'Корзина пуста<br/>';
     }
-
 }
 ?>
